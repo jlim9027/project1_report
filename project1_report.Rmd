@@ -1,0 +1,123 @@
+---
+title: "Creating images with R"
+author: "Jane"
+subtitle: with a little bit of magick
+output:
+  html_document: 
+    css: style.css
+  pdf_document: default
+  word_document: default
+  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE)#, message=FALSE, warning=FALSE, error=FALSE)
+```
+
+```{r}
+library(magick)
+```
+
+```{css}
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+
+body {
+  background-color: pink;
+  color: blue;
+  font-family: "Times New Roman", Times, serif;
+
+}
+
+h1 {
+  background-color: pink;
+  color: white;
+  font-family: "Times New Roman", Times, serif;
+}
+
+
+
+div {
+  background-color: pink;
+  color: white;
+  font-family: "Times New Roman", Times, serif;
+
+}
+
+
+</style>
+</head>
+</html>
+
+
+
+```
+
+## Project requirements
+## I have met the requirement for project 1 by working with Github by using the demo repo to understand how to add functions that make different fonts and linking to websites. 
+#link to github repo (https://github.com/jlim9027/cat-meme.git)
+#[link to meme website](https://www.google.com/url?sa=i&url=https%3A%2F%2Fknowyourmeme.com%2Fmemes%2Fhuh-cat&psig=AOvVaw3xciAmUvS9KfFZppYFcZH7&ust=1710330860304000&source=images&cd=vfe&opi=89978449&ved=0CBUQjhxqFwoTCPCLiZDV7oQDFQAAAAAdAAAAABAD)
+
+![](ss.png)
+
+#Write at least 100 words for this section
+
+
+## My meme
+![](inspo_meme.jpg)
+## The key components I changed from the inspo_meme is the image and text. I changed the image to a dog photo and changed the text from "HUH?" to "WHAT?"
+Describe the key components of the image you re-created and the features you changed
+When you knit your Rmd file to HTML, your meme will be produced and included in the output (make sure your R code does produce your meme as output)
+Include the code used to create your animated meme in the code chunk labelled “animation-code”
+When you knit your Rmd file to HTML, your animated meme will NOT be produced and included in the output
+Instead, include the GIF you created in Part B using markdown
+
+```{r meme-code, eval=TRUE}
+library(magick)
+
+meme <- image_read("p1.jpeg")
+
+# Add text "what" in the middle of the image
+img_with_text <- image_annotate(meme, "WHAT?", size = 200, gravity = "center", color = "black")
+
+# Display the final image
+image_browse(img_with_text)
+
+# Save meme as image file
+image_write(img_with_text, "my_meme.png")
+
+# Create animation
+frame1 <- image_read("my_meme.png")
+frame2 <- image_read("p2.jpeg")
+frame3 <- image_read("p3.jpeg")
+frame4 <- image_read("p4.jpeg")
+
+rs1 <- image_scale(frame1, "400x400!")
+rs2 <- image_scale(frame2, "400x400!")
+rs3 <- image_scale(frame3, "400x400!")
+rs4 <- image_scale(frame4, "400x400!")
+
+my_meme <- image_append(c(rs1, rs2, rs3, rs4))
+my_meme
+```
+
+## My animation
+
+```{r animation-code, eval=FALSE}
+# Append frames horizontally to create animation
+myanimation <- image_animate(my_meme, fps=1)
+myanimation
+# Save animated GIF
+image_write(myanimation, "my_animation.gif")
+
+```
+![](my_animation.gif)
+
+## Creativity
+  
+
+## Learning reflection
+
